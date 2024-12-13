@@ -1,9 +1,8 @@
 function App() {
   return (
-    <>
-      <h1>Hello</h1>
-      <button className="btn btn-primary">CLICK</button>
-    </>
+    <div>
+      <h1 className="text-2xl underline">Hello</h1>
+    </div>
   );
 }
 
