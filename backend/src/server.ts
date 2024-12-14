@@ -5,6 +5,7 @@ import { connectDB } from './config/db';
 import cors from 'cors'
 import morgan from 'morgan';
 import userRoutes from './routes/user.route'
+import productRoutes from './routes/product.route'
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(morgan('dev'));
 
 //Routes
 app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 app.get('/', (req, res) => {
   res.send('Server ready')
