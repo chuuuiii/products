@@ -1,16 +1,26 @@
 import React from "react";
+import useAuthStore from "../store/useAuthStore";
 
 const Signup = () => {
+  const { username, email, password, updateField, signup } = useAuthStore();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signup();
+  };
+
   return (
     <div className="flex flex-col items-center min-h-screen py-10 font-poppins">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
         <h1 className="text-2xl text-center mb-6">Create Account</h1>
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="form-control">
             <label>Username</label>
             <input
               type="text"
               placeholder="Username"
+              value={username}
+              onChange={(e) => updateField("username", e.target.value)}
               className="input input-bordered w-full"
             />
           </div>
@@ -19,6 +29,8 @@ const Signup = () => {
             <input
               type="email"
               placeholder="Email"
+              value={email}
+              onChange={(e) => updateField("email", e.target.value)}
               className="input input-bordered w-full"
             />
           </div>
@@ -27,6 +39,8 @@ const Signup = () => {
             <input
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => updateField("password", e.target.value)}
               className="input input-bordered
               w-full"
             />

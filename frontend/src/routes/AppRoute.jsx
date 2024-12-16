@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import Home from "../pages/Home";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
+import UserDashboard from "../dashboard/UserDashboard";
+import CreateProduct from "../product/CreateProduct";
 
 const AppRoute = () => {
   return (
@@ -12,8 +14,12 @@ const AppRoute = () => {
       <Navbar />
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
+        <Route path="/user" element={<UserDashboard />}>
+          <Route path="products" element={<CreateProduct />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
