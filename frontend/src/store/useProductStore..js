@@ -54,6 +54,40 @@ export const useProductStore = create((set) => ({
     }
   },
 
+  updateProduct: async (id, updateProduct) => {
+    try {
+      const res = await fetch(`/api/products/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateProduct)
+      })
+      const data = await res.json();
+      if (res.ok) {
+        set((state) => ({
+          products: state.products.map((product) => product._id === id ? data.data : product),
+        }));
+        return { success: true, message: 'Product updated successfully' }
+      } else {
+        return { success: false, message: data.message || 'Failed to update' }
+      }
+    } catch (error) {
+      return { success: false, message: 'Network error, Please try again' }
+    }
+  },
+
+  deleteProduct: async (id) => {
+    const res = await fetch(`/api/products/${id}`, {
+      method: 'DELETE'
+    })
+    const data = await res.json();
+    if (data.success) {
+      set((state) => ({ products: state.products.filter(product => product._id !== id )}));
+      return { success: true, message: data.message }
+    }
+  },
+
   resetForm: () => initialProductState,
 
 
