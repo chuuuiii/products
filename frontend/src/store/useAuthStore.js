@@ -8,6 +8,8 @@ const useAuthStore = create((set, get) => ({
   username: '',
   email: '',
   password: '',
+  isAuthenticated: false,
+
 
 
   updateField: (field, value) => set((state) => ({ ...state, [field]: value})),
@@ -56,7 +58,7 @@ const useAuthStore = create((set, get) => ({
       const data = await res.json();
       if (data.success) {
         toast.success('Log in successful');
-        set({ username: '', password: '' })
+        set({ username: '', password: '', isAuthenticated: true });
 
       if (navigate) {
         navigate('/user')
@@ -68,7 +70,13 @@ const useAuthStore = create((set, get) => ({
     } catch (error) {
       toast.error('Network error', error)
     }
-  }
+  },
+
+  logout: (navigate) => {
+    set({ username: '', email: '', password: '', isAuthenticated: false });
+    toast.info('Logout successful');
+    navigate('/')
+  },
 
 }))
 
