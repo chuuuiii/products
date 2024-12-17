@@ -9,12 +9,6 @@ export default function UserDashboard() {
           <h1 className="text-2xl font-semibold">Dashboard</h1>
         </div>
         <nav className="space-y-2">
-          <Link to="" className="block px-3 py-3 hover:bg-gray-100 rounded">
-            Home
-          </Link>
-          <Link to="" className="block px-3 py-3 hover:bg-gray-100 rounded">
-            Order
-          </Link>
           <Link
             to="/user/products"
             className="block px-3 py-3 hover:bg-gray-100 rounded"
