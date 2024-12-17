@@ -61,12 +61,12 @@ const ProductDetails = () => {
     <div className="mt-5 text-center">
       <h1 className="text-lg font-semibold">Product Details</h1>
       <div className="overflow-x-auto">
-        <table className="table">
+        <table className="table min-w-[800px] border border-gray-200">
           <thead className="bg-gray-100">
             <tr>
               <th>No.</th>
               <th>Product name</th>
-              <th>Quatity</th>
+              <th>Quantity</th>
               <th>Price</th>
               <th>Category</th>
               <th>Action</th>
@@ -75,31 +75,33 @@ const ProductDetails = () => {
           <tbody>
             {products.length > 0 ? (
               products.map((product, index) => (
-                <tr key={index} className="">
-                  <td></td>
+                <tr key={index} className="border-b">
+                  <td>{index + 1}</td>
                   <td>{product.name}</td>
                   <td>{product.quantity}</td>
                   <td>${product.price}</td>
                   <td>{product.category}</td>
-                  <td className="">
-                    <button
-                      onClick={() => openUpdateModal(product)}
-                      className="btn btn-info mr-3"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(product._id)}
-                      className="btn btn-warning"
-                    >
-                      Delete
-                    </button>
+                  <td>
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <button
+                        onClick={() => openUpdateModal(product)}
+                        className="btn btn-info text-white px-3 py-1"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(product._id)}
+                        className="btn btn-warning text-white px-3 py-1"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="text-center text-gray-500">
+                <td colSpan="6" className="text-center text-gray-500">
                   No available products
                 </td>
               </tr>
@@ -113,59 +115,61 @@ const ProductDetails = () => {
         isOpen={isModalOpen}
         onRequestClose={closeUpdateModal}
         contentLabel="Update Product Modal"
-        className="right-modal"
-        overlayClassName="right-modal-overlay"
+        className="right-modal p-4 w-full max-w-[600px] mx-auto"
+        overlayClassName="right-modal-overlay flex items-center justify-center p-4"
       >
         <h2 className="text-xl font-semibold mb-4">Update Product</h2>
         {currentProduct && (
           <form onSubmit={handleUpdate}>
-            <label className="block mb-2">
-              Product name:
-              <input
-                type="text"
-                name="name"
-                value={currentProduct.name}
-                onChange={handleChange}
-                className="input input-bordered w-full"
-              />
-            </label>
-            <label className="block mb-2">
-              Quantity:
-              <input
-                type="number"
-                name="quantity"
-                value={currentProduct.quantity}
-                onChange={handleChange}
-                className="input input-bordered w-full"
-              />
-            </label>
-            <label className="block mb-2">
-              Price:
-              <input
-                type="number"
-                name="price"
-                value={currentProduct.price}
-                onChange={handleChange}
-                className="input input-bordered w-full"
-              />
-            </label>
-            <label className="block mb-2">
-              Category:
-              <select
-                name="category"
-                value={currentProduct.category}
-                onChange={handleChange}
-                className="select select-bordered w-full"
-              >
-                <option value="">Select Category</option>
-                <option value="Gadget">Gadget</option>
-                <option value="Apparel">Apparel</option>
-                <option value="Vehicle">Vehicle</option>
-                <option value="Appliances">Appliances</option>
-                <option value="Shoes">Shoes</option>
-              </select>
-            </label>
-            <label className="block mb-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <label>
+                Product name:
+                <input
+                  type="text"
+                  name="name"
+                  value={currentProduct.name}
+                  onChange={handleChange}
+                  className="input input-bordered w-full"
+                />
+              </label>
+              <label>
+                Quantity:
+                <input
+                  type="number"
+                  name="quantity"
+                  value={currentProduct.quantity}
+                  onChange={handleChange}
+                  className="input input-bordered w-full"
+                />
+              </label>
+              <label>
+                Price:
+                <input
+                  type="number"
+                  name="price"
+                  value={currentProduct.price}
+                  onChange={handleChange}
+                  className="input input-bordered w-full"
+                />
+              </label>
+              <label>
+                Category:
+                <select
+                  name="category"
+                  value={currentProduct.category}
+                  onChange={handleChange}
+                  className="select select-bordered w-full"
+                >
+                  <option value="">Select Category</option>
+                  <option value="Gadget">Gadget</option>
+                  <option value="Apparel">Apparel</option>
+                  <option value="Vehicle">Vehicle</option>
+                  <option value="Appliances">Appliances</option>
+                  <option value="Shoes">Shoes</option>
+                </select>
+              </label>
+            </div>
+            <label className="block mt-4">
               Image URL:
               <input
                 type="text"
@@ -175,7 +179,7 @@ const ProductDetails = () => {
                 className="input input-bordered w-full"
               />
             </label>
-            <label className="block mb-2">
+            <label className="block mt-4">
               Description:
               <textarea
                 type="text"
@@ -185,14 +189,14 @@ const ProductDetails = () => {
                 className="textarea textarea-bordered w-full"
               />
             </label>
-            <div className="flex justify-end mt-4">
-              <button type="submit" className="btn btn-info mr-5">
+            <div className="flex justify-end gap-3 mt-4">
+              <button type="submit" className="btn btn-info px-4 py-2">
                 Update
               </button>
               <button
                 onClick={closeUpdateModal}
                 type="button"
-                className="btn btn-neutral"
+                className="btn btn-neutral px-4 py-2"
               >
                 Cancel
               </button>
